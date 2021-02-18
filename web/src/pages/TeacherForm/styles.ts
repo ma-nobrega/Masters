@@ -47,6 +47,17 @@ export const Main = styled.div`
       width: 100%;
       padding-bottom: 1.6rem;
       border-bottom: 1px solid var(--color-line-in-white);
+      button {
+        background: none;
+        border: 0;
+        color: var(--color-primary);
+        font: 700 1.6rem Archivo;
+        cursor: pointer;
+        transition: color 0.2s;
+        &:hover {
+          color: ${darken(0.1, '#2a94f4')};
+        }
+      }
     }
     div + div {
       margin-top: 2.4rem;
@@ -101,6 +112,17 @@ export const Footer = styled.div`
     button {
       width: 20rem;
       margin-top: 0;
+    }
+  }
+`;
+
+export const ScheduleItem = styled.div`
+  @media (min-width: 700px) {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    column-gap: 1.6rem;
+    div {
+      margin-top: 0 !important;
     }
   }
 `;
