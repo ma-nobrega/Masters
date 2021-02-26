@@ -1,4 +1,6 @@
 import React from 'react';
+import { FiDollarSign, FiUser } from 'react-icons/fi';
+import { FaWhatsapp } from 'react-icons/fa';
 import { Container, Main, Footer, ScheduleItem } from './styles';
 import Header from '../../components/PageHeader';
 import Input from '../../components/Input';
@@ -17,9 +19,9 @@ const TeacherList: React.FC = () => {
       <Main>
         <fieldset>
           <legend>Seus dados</legend>
-          <Input label="Nome completo" name="name" />
-          <Input label="Avatar" name="avatar" />
-          <Input label="Whatsapp" name="whatsapp" />
+          <Input icon={FiUser} label="Nome completo" name="name" />
+          <Input icon={FiUser} label="Avatar" name="avatar" />
+          <Input icon={FaWhatsapp} label="Whatsapp" name="whatsapp" />
           <TextArea label="Biografia" name="bio" />
         </fieldset>
         <fieldset>
@@ -41,7 +43,11 @@ const TeacherList: React.FC = () => {
               { value: 'Sociologia', label: 'Sociologia' },
             ]}
           />
-          <Input label="Custo da sua hora por aula" name="cost" />
+          <Input
+            icon={FiDollarSign}
+            label="Custo da sua hora por aula"
+            name="cost"
+          />
         </fieldset>
         <fieldset>
           <legend>

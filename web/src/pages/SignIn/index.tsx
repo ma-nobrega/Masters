@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiLogIn } from 'react-icons/fi';
+import { FiLock, FiLogIn, FiMail } from 'react-icons/fi';
 
 import { Link } from 'react-router-dom';
 import { Container, Content, Background } from './styles';
@@ -14,8 +14,14 @@ const SignIn: React.FC = () => {
         <img src={Logo} alt="Proffy" />
         <form>
           <h1>Faça seu logon</h1>
-          <Input placeholder="Digite seu email" label="E-mail" name="email" />
           <Input
+            placeholder="Digite seu email"
+            label="E-mail"
+            name="email"
+            icon={FiMail}
+          />
+          <Input
+            icon={FiLock}
             type="password"
             placeholder="Digite sua senha"
             label="Senha"

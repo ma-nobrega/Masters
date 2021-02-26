@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiHome } from 'react-icons/fi';
+import { FiHome, FiLock, FiMail, FiUser } from 'react-icons/fi';
 
 import { Link } from 'react-router-dom';
 import { Container, Content, Background } from './styles';
@@ -15,9 +15,20 @@ const SignIn: React.FC = () => {
         <img src={Logo} alt="Proffy" />
         <form>
           <h1>Faça seu cadastro</h1>
-          <Input placeholder="Digite seu nome" label="Nome" name="name" />
-          <Input placeholder="Digite seu email" label="E-mail" name="email" />
           <Input
+            icon={FiUser}
+            placeholder="Digite seu nome"
+            label="Nome"
+            name="name"
+          />
+          <Input
+            icon={FiMail}
+            placeholder="Digite seu email"
+            label="E-mail"
+            name="email"
+          />
+          <Input
+            icon={FiLock}
             type="password"
             placeholder="Digite sua senha"
             label="Senha"
