@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiBook, FiDollarSign, FiUser } from 'react-icons/fi';
+import { FiBook, FiCalendar, FiDollarSign, FiUser } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import { Container, Main, Footer, ScheduleItem } from './styles';
 import Header from '../../components/PageHeader';
@@ -57,6 +57,7 @@ const TeacherList: React.FC = () => {
           </legend>
           <ScheduleItem>
             <Select
+              icon={FiCalendar}
               label="Dia da semana"
               name="week"
               options={[

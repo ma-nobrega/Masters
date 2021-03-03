@@ -1,4 +1,5 @@
 import React from 'react';
+import { FiBook, FiCalendar } from 'react-icons/fi';
 import { Container, Form, Main } from './styles';
 import Header from '../../components/PageHeader';
 import Input from '../../components/Input';
@@ -11,6 +12,7 @@ const TeacherList: React.FC = () => {
       <Header title="Estes são os proffys disponíveis.">
         <Form id="search-teachers">
           <Select
+            icon={FiBook}
             label="Matéria"
             name="subject"
             options={[
@@ -28,6 +30,7 @@ const TeacherList: React.FC = () => {
             ]}
           />
           <Select
+            icon={FiCalendar}
             label="Dia da semana"
             name="week"
             options={[
@@ -40,7 +43,7 @@ const TeacherList: React.FC = () => {
               { value: '6', label: 'Sabado' },
             ]}
           />
-          <Input type="date" label="Hora" name="time" />
+          <Input type="time" label="Hora" name="time" />
         </Form>
       </Header>
       <Main>
