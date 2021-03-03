@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiDollarSign, FiUser } from 'react-icons/fi';
+import { FiBook, FiDollarSign, FiUser } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import { Container, Main, Footer, ScheduleItem } from './styles';
 import Header from '../../components/PageHeader';
@@ -27,6 +27,7 @@ const TeacherList: React.FC = () => {
         <fieldset>
           <legend>Sobre a aula</legend>
           <Select
+            icon={FiBook}
             label="Matéria"
             name="subject"
             options={[

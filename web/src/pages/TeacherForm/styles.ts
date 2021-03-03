@@ -122,7 +122,7 @@ export const ScheduleItem = styled.div`
     grid-template-columns: 2fr 1fr 1fr;
     column-gap: 1.6rem;
     div {
-      margin-top: 0 !important;
+      margin-top: 0.8rem !important;
     }
   }
 `;
