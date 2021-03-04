@@ -35,12 +35,13 @@ const Select: React.FC<Props> = ({
       <Content isFocused={isFocused}>
         {Icon && <Icon size={20} />}
         <select
+          defaultValue=""
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           id={name}
           {...rest}
         >
-          <option value="" disabled selected hidden>
+          <option value="" disabled hidden>
             Selecione uma opção
           </option>
           {options.map(option => {
