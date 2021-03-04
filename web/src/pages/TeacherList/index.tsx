@@ -1,15 +1,17 @@
 import React from 'react';
 import { FiBook, FiCalendar } from 'react-icons/fi';
 import { Container, Form, Main } from './styles';
-import Header from '../../components/PageHeader';
+import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 import TeacherItem from '../../components/TeacherItem';
 import Select from '../../components/Select';
+import Header from '../../components/Header';
 
 const TeacherList: React.FC = () => {
   return (
     <Container id="page-teacher-list" className="container">
-      <Header title="Estes são os proffys disponíveis.">
+      <Header />
+      <PageHeader title="Estes são os proffys disponíveis.">
         <Form id="search-teachers">
           <Select
             icon={FiBook}
@@ -45,7 +47,7 @@ const TeacherList: React.FC = () => {
           />
           <Input type="time" label="Hora" name="time" />
         </Form>
-      </Header>
+      </PageHeader>
       <Main>
         <TeacherItem
           name="Matheus Nobrega"

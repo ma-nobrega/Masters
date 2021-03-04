@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { FiBook, FiCalendar, FiDollarSign, FiUser } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
 import { Container, Main, Footer, ScheduleItem } from './styles';
-import Header from '../../components/PageHeader';
+import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 
 import warningIcon from '../../assets/icons/warning.svg';
 import TextArea from '../../components/TextArea';
 import Select from '../../components/Select';
+import Header from '../../components/Header';
 
 const TeacherList: React.FC = () => {
   const [scheduleItems, setScheduleItems] = useState([
@@ -20,7 +21,8 @@ const TeacherList: React.FC = () => {
 
   return (
     <Container id="page-teacher-form" className="container">
-      <Header
+      <Header />
+      <PageHeader
         title="Que incrivel que você quer dar aulas."
         description="O primeiro passo é preencher esse formulario de inscrição"
       />

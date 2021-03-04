@@ -7,15 +7,22 @@ export const Container = styled.div`
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-direction;
   flex-direction: column;
 
   color: var(--color-text-in-primary);
 `;
 
-export const Content = styled.div`
+export const MainContent = styled.main`
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const Main = styled.div`
   @media (min-width: 1100px) {
-    &#page-landing-content {
+    &#page-landing-main {
       max-width: 1100px;
       display: grid;
       grid-template-rows: 350px 1fr;
