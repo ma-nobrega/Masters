@@ -27,17 +27,16 @@ export const Content = styled.div`
     width: 34rem;
     text-align: center;
     h1 {
-      margin-bottom: 2.4rem;
+      margin-bottom: 1.6rem;
     }
     div {
-      margin-bottom: 1.6rem;
+      margin-bottom: 0.8rem;
       text-align: start;
     }
     button {
       background-color: var(--color-primary);
       width: 100%;
       height: 5.6rem;
-      padding: 0 1.6rem;
       border: 0;
       border-radius: 0.4rem;
       color: var(--color-button-text);
@@ -61,6 +60,9 @@ export const Content = styled.div`
     > svg {
       margin-right: 1.6rem;
     }
+  }
+  @media (min-width: 1000px) {
+    max-height: 80rem;
   }
 `;
 
