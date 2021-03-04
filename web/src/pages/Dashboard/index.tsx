@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { BsBook, BsLaptop, BsHeartFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
@@ -15,6 +15,12 @@ import {
 } from './styles';
 
 const Dashboard: React.FC = () => {
+  const [totalConnections, setTotalConnections] = useState(0);
+
+  useEffect(() => {
+    // conectar api
+  }, [totalConnections]);
+
   return (
     <Container>
       <Content id="page-landing-content" className="container">
@@ -38,7 +44,7 @@ const Dashboard: React.FC = () => {
           </Link>
         </ButtonContainer>
         <Connections className="total-connections">
-          Total de 200 conexões já realizadas <BsHeartFill />
+          Total de {totalConnections} conexões já realizadas <BsHeartFill />
         </Connections>
       </Content>
     </Container>
