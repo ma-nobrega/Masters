@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components';
 
 interface ContentProps {
   isFocused: boolean;
+  isFilled: boolean;
+  isErrored: boolean;
 }
 
 export const Container = styled.div`
@@ -24,10 +26,22 @@ export const Content = styled.div<ContentProps>`
   border: 1px solid var(--color-line-in-white);
 
   ${props =>
+    props.isErrored &&
+    css`
+      border-color: var(--color-error);
+    `}
+
+  ${props =>
     props.isFocused &&
     css`
       color: var(--color-primary);
       border-color: var(--color-primary);
+    `}
+
+  ${props =>
+    props.isFilled &&
+    css`
+      color: var(--color-primary);
     `}
 
   input {
@@ -38,6 +52,7 @@ export const Content = styled.div<ContentProps>`
     font: 1.6rem Archivo;
     margin: 0 0.8rem;
     padding: 0 0.8rem;
+    background: var(--color-input-background);
   }
   svg {
     margin: 0 1.6rem;
@@ -45,7 +60,8 @@ export const Content = styled.div<ContentProps>`
     width: 2.4rem;
   }
   svg,
-  input {
+  input,
+  svg {
     margin: 0 0.8rem;
   }
 `;

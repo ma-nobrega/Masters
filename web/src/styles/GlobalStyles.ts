@@ -42,6 +42,7 @@ export default createGlobalStyle`
   --color-button-text: #FFFFFF;
   --color-box-base: #FFFFFF;
   --color-box-footer: #FAFAFC;
+  --color-error: #de0909;
   }
 
   .container{
