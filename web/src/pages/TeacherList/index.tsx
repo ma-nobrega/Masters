@@ -1,19 +1,52 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import { FiBook, FiCalendar } from 'react-icons/fi';
-import { Container, Form, Main } from './styles';
+import * as Yup from 'yup';
+import { Form } from '@unform/web';
+import { FormHandles } from '@unform/core';
+import { Container, Main } from './styles';
 import PageHeader from '../../components/PageHeader';
 import Input from '../../components/Input';
 import TeacherItem from '../../components/TeacherItem';
 import Select from '../../components/Select';
 import Header from '../../components/Header';
+import getValidationErrors from '../../utils/getValidationErros';
 
 const TeacherList: React.FC = () => {
+  const formRef = useRef<FormHandles>(null);
+  const handleSubmit = useCallback(async (data: object) => {
+    try {
+      formRef.current?.setErrors({});
+
+      const schema = Yup.object().shape({
+        name: Yup.string().required('Nome obrigatório'),
+        avatar: Yup.string().required('Avatar obrigatório'),
+        whatsapp: Yup.string().required('Whatsapp obrigatório'),
+        bio: Yup.string()
+          .required('Biografia obrigatório')
+          .min(200, 'A biografia menor que 200 caracteres'),
+        subject: Yup.string().required('Materia obrigatório'),
+        cost: Yup.string().required('Valor obrigatório'),
+        week: Yup.string().required('Dia da semana obrigatório'),
+        from: Yup.string().required('Horário obrigatório'),
+        to: Yup.string().required('Horário obrigatório'),
+      });
+
+      await schema.validate(data, {
+        abortEarly: false,
+      });
+    } catch (err) {
+      const errors = getValidationErrors(err);
+      formRef.current?.setErrors(errors);
+    }
+  }, []);
+
   return (
     <Container id="page-teacher-list" className="container">
       <Header />
       <PageHeader title="Estes são os proffys disponíveis.">
-        <Form id="search-teachers">
+        <Form ref={formRef} onSubmit={handleSubmit} id="search-teachers">
           <Select
+            firstOption="aaa"
             icon={FiBook}
             label="Matéria"
             name="subject"
@@ -32,6 +65,7 @@ const TeacherList: React.FC = () => {
             ]}
           />
           <Select
+            firstOption="aaa"
             icon={FiCalendar}
             label="Dia da semana"
             name="week"

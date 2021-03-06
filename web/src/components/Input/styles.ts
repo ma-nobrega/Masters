@@ -1,5 +1,7 @@
 import styled, { css } from 'styled-components';
 
+import Tooltip from '../Tooltip';
+
 interface ContentProps {
   isFocused: boolean;
   isFilled: boolean;
@@ -13,7 +15,7 @@ export const Container = styled.div`
   }
   display: flex;
   flex-direction: column;
-  div {
+  > div {
     margin-top: 0.8rem;
   }
 `;
@@ -54,14 +56,28 @@ export const Content = styled.div<ContentProps>`
     padding: 0 0.8rem;
     background: var(--color-input-background);
   }
-  svg {
-    margin: 0 1.6rem;
+  > svg {
+    margin-left: 0.8rem;
     height: 2.4rem;
     width: 2.4rem;
   }
-  svg,
-  input,
+`;
+
+export const Error = styled(Tooltip)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-error);
   svg {
-    margin: 0 0.8rem;
+    margin-right: 0.8rem;
+    height: 2.4rem;
+    width: 2.4rem;
+  }
+  span {
+    background: var(--color-error);
+    color: var(--color-button-text);
+    &::before {
+      border-color: var(--color-error) transparent;
+    }
   }
 `;

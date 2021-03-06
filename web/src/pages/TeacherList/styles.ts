@@ -1,6 +1,27 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  form {
+    &#search-teachers {
+      margin-top: 3.2rem;
+      label {
+        color: var(--color-title-in-primary);
+      }
+      > div + div {
+        margin-top: 1.4rem;
+        @media (min-width: 700px) {
+          margin-top: 0;
+        }
+      }
+      @media (min-width: 700px) {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 16px;
+        position: absolute;
+        bottom: -28px;
+      }
+    }
+  }
   &#page-teacher-list {
     width: 100vw;
     height: 100vh;
@@ -10,27 +31,7 @@ export const Container = styled.div`
   }
 `;
 
-export const Form = styled.form`
-  &#search-teachers {
-    margin-top: 3.2rem;
-    label {
-      color: var(--color-title-in-primary);
-    }
-    > div + div {
-      margin-top: 1.4rem;
-      @media (min-width: 700px) {
-        margin-top: 0;
-      }
-    }
-    @media (min-width: 700px) {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      column-gap: 16px;
-      position: absolute;
-      bottom: -28px;
-    }
-  }
-`;
+export const Form = styled.form``;
 
 export const Main = styled.main`
   margin: 3.2rem auto;

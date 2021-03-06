@@ -1,11 +1,20 @@
-import React, { SelectHTMLAttributes, useCallback, useState } from 'react';
+import React, {
+  SelectHTMLAttributes,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { IconBaseProps } from 'react-icons';
+import { FiAlertCircle } from 'react-icons/fi';
+import { useField } from '@unform/core';
 
-import { Container, Content } from './styles';
+import { Container, Content, Error } from './styles';
 
 interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   label: string;
   name: string;
+  firstOption: string;
   options: Array<{
     value: string;
     label: string;
@@ -14,35 +23,49 @@ interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
 }
 const Select: React.FC<Props> = ({
   icon: Icon,
+  firstOption,
   label,
   name,
   options,
   ...rest
 }) => {
+  const selectRef = useRef<HTMLSelectElement>(null);
+  const { fieldName, error, registerField } = useField(name);
   const [isFocused, setIsFocused] = useState(false);
+  const [isFilled, setIsFilled] = useState(false);
 
-  const handleInputFocus = useCallback(() => {
+  const handleSelectFocus = useCallback(() => {
     setIsFocused(true);
   }, []);
 
-  const handleInputBlur = useCallback(() => {
+  const handleSelectBlur = useCallback(() => {
     setIsFocused(false);
+    setIsFilled(!!selectRef.current?.value);
   }, []);
+
+  useEffect(() => {
+    registerField({
+      name: fieldName,
+      ref: selectRef.current,
+      path: 'value',
+    });
+  }, [fieldName, registerField]);
 
   return (
     <Container>
       <label htmlFor={name}>{label}</label>
-      <Content isFocused={isFocused}>
+      <Content isErrored={!!error} isFilled={isFilled} isFocused={isFocused}>
         {Icon && <Icon size={20} />}
         <select
           defaultValue=""
-          onFocus={handleInputFocus}
-          onBlur={handleInputBlur}
+          ref={selectRef}
+          onFocus={handleSelectFocus}
+          onBlur={handleSelectBlur}
           id={name}
           {...rest}
         >
           <option value="" disabled hidden>
-            Selecione uma opção
+            {firstOption}
           </option>
           {options.map(option => {
             return (
@@ -52,6 +75,11 @@ const Select: React.FC<Props> = ({
             );
           })}
         </select>
+        {error && (
+          <Error title={error}>
+            <FiAlertCircle />
+          </Error>
+        )}
       </Content>
     </Container>
   );

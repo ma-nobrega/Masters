@@ -53,13 +53,6 @@ const SignIn: React.FC = () => {
             label="E-mail"
             name="email"
           />
-          {/* <Input
-            icon={FiLock}
-            type="password"
-            placeholder="Digite sua senha"
-            label="Senha"
-            name="senha"
-          /> */}
           <Input
             icon={FiLock}
             placeholder="Digite sua senha"

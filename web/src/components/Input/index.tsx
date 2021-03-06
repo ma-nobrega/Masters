@@ -9,7 +9,7 @@ import { IconBaseProps } from 'react-icons';
 import { FiAlertCircle } from 'react-icons/fi';
 import { useField } from '@unform/core';
 
-import { Container, Content } from './styles';
+import { Container, Content, Error } from './styles';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
@@ -52,7 +52,11 @@ const Input: React.FC<Props> = ({ icon: Icon, label, name, ...rest }) => {
           id={name}
           {...rest}
         />
-        {error && <FiAlertCircle />}
+        {error && (
+          <Error title={error}>
+            <FiAlertCircle />
+          </Error>
+        )}
       </Content>
     </Container>
   );

@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components';
 
 interface TextAreaProps {
   isFocused: boolean;
+  isFilled: boolean;
+  isErrored: boolean;
 }
 
 export const Container = styled.div`
@@ -24,8 +26,21 @@ export const Textarea = styled.textarea<TextAreaProps>`
   padding: 1.2rem 1.2rem;
   font: 1.6rem Archivo;
   ${props =>
+    props.isErrored &&
+    css`
+      border-color: var(--color-error);
+    `}
+
+  ${props =>
     props.isFocused &&
     css`
+      color: var(--color-primary);
       border-color: var(--color-primary);
+    `}
+
+  ${props =>
+    props.isFilled &&
+    css`
+      color: var(--color-primary);
     `}
 `;

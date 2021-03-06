@@ -29,7 +29,7 @@ export const Content = styled.div`
     h1 {
       margin-bottom: 2.4rem;
     }
-    div {
+    > div {
       margin-bottom: 1.6rem;
       text-align: start;
     }
