@@ -4,6 +4,7 @@ import {
   FiCalendar,
   FiCamera,
   FiDollarSign,
+  FiMinus,
   FiUser,
 } from 'react-icons/fi';
 import { FaWhatsapp } from 'react-icons/fa';
@@ -53,8 +54,12 @@ const TeacherList: React.FC = () => {
     { week_day: 0, from: '', to: '' },
   ]);
 
-  function addNewScheduleItem() {
+  function addNewScheduleItem(): void {
     setScheduleItems([...scheduleItems, { week_day: 0, from: '', to: '' }]);
+  }
+
+  function RemoveNewScheduleItem(): void {
+    setScheduleItems([...scheduleItems.splice(1)]);
   }
 
   return (
@@ -107,7 +112,7 @@ const TeacherList: React.FC = () => {
                 + Novo horário
               </button>
             </legend>
-            {scheduleItems.map(scheduleItem => {
+            {scheduleItems.map((scheduleItem, index) => {
               return (
                 <ScheduleItem key={scheduleItem.week_day}>
                   <Select
@@ -127,6 +132,22 @@ const TeacherList: React.FC = () => {
                   />
                   <Input name="from" label="Das" type="time" />
                   <Input name="to" label="Até" type="time" />
+                  {index !== 0 && (
+                    <>
+                      <FiMinus
+                        className="remove"
+                        onClick={RemoveNewScheduleItem}
+                      />
+                      <div
+                        className="remove-mobile"
+                        aria-hidden="true"
+                        onClick={RemoveNewScheduleItem}
+                      >
+                        Excluir horario
+                        <FiMinus />
+                      </div>
+                    </>
+                  )}
                 </ScheduleItem>
               );
             })}

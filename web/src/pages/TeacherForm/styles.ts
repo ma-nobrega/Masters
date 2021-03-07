@@ -117,12 +117,39 @@ export const Footer = styled.div`
 `;
 
 export const ScheduleItem = styled.div`
+  svg {
+    cursor: pointer;
+    &.remove {
+      display: none;
+    }
+  }
   @media (min-width: 700px) {
+    position: relative;
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     column-gap: 1.6rem;
     div {
       margin-top: 0.8rem !important;
+    }
+    svg {
+      &.remove {
+        display: block;
+        position: absolute;
+        top: 5.6rem;
+        right: -3.2rem;
+      }
+    }
+  }
+  .remove-mobile {
+    margin: 1.5rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      margin-left: 1rem;
+    }
+    @media (min-width: 700px) {
+      display: none;
     }
   }
 `;
