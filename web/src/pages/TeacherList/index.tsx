@@ -18,17 +18,9 @@ const TeacherList: React.FC = () => {
       formRef.current?.setErrors({});
 
       const schema = Yup.object().shape({
-        name: Yup.string().required('Nome obrigatório'),
-        avatar: Yup.string().required('Avatar obrigatório'),
-        whatsapp: Yup.string().required('Whatsapp obrigatório'),
-        bio: Yup.string()
-          .required('Biografia obrigatório')
-          .min(200, 'A biografia menor que 200 caracteres'),
         subject: Yup.string().required('Materia obrigatório'),
-        cost: Yup.string().required('Valor obrigatório'),
         week: Yup.string().required('Dia da semana obrigatório'),
-        from: Yup.string().required('Horário obrigatório'),
-        to: Yup.string().required('Horário obrigatório'),
+        time: Yup.string().required('Horário obrigatório'),
       });
 
       await schema.validate(data, {
@@ -80,6 +72,7 @@ const TeacherList: React.FC = () => {
             ]}
           />
           <Input type="time" label="Hora" name="time" />
+          <button type="submit">Buscar</button>
         </Form>
       </PageHeader>
       <Main>
