@@ -58,8 +58,26 @@ const TeacherList: React.FC = () => {
     setScheduleItems([...scheduleItems, { week_day: 0, from: '', to: '' }]);
   }
 
-  function RemoveNewScheduleItem(): void {
-    setScheduleItems([...scheduleItems.splice(1)]);
+  function RemoveNewScheduleItem(index: number): void {
+    scheduleItems.splice(index, 1);
+    setScheduleItems([...scheduleItems]);
+  }
+
+  function setScheduleItemValue(
+    position: number,
+    field: string,
+    value: string,
+  ): void {
+    const updatedScheduleItems = scheduleItems.map((scheduleItem, index) => {
+      if (index === position) {
+        return {
+          ...scheduleItem,
+          [field]: value,
+        };
+      }
+      return scheduleItem;
+    });
+    setScheduleItems(updatedScheduleItems);
   }
 
   return (
@@ -114,34 +132,58 @@ const TeacherList: React.FC = () => {
             </legend>
             {scheduleItems.map((scheduleItem, index) => {
               return (
-                <ScheduleItem key={scheduleItem.week_day}>
+                <ScheduleItem key={Number(index)}>
                   <Select
                     firstOption="Selecione um dia"
                     icon={FiCalendar}
                     label="Dia da semana"
+                    value={scheduleItem.week_day}
+                    onChange={
+                      e =>
+                        setScheduleItemValue(index, 'week_day', e.target.value)
+                      // eslint-disable-next-line react/jsx-curly-newline
+                    }
                     name="week"
                     options={[
-                      { value: '0', label: 'Domingo' },
-                      { value: '1', label: 'Segunda-feira' },
-                      { value: '2', label: 'Terça-feira' },
-                      { value: '3', label: 'Quarta-feira ' },
-                      { value: '4', label: 'Quinta-feira' },
-                      { value: '5', label: 'Sexta-feira' },
-                      { value: '6', label: 'Sabado' },
+                      { value: 0, label: 'Domingo' },
+                      { value: 1, label: 'Segunda-feira' },
+                      { value: 2, label: 'Terça-feira' },
+                      { value: 3, label: 'Quarta-feira ' },
+                      { value: 4, label: 'Quinta-feira' },
+                      { value: 5, label: 'Sexta-feira' },
+                      { value: 6, label: 'Sabado' },
                     ]}
                   />
-                  <Input name="from" label="Das" type="time" />
-                  <Input name="to" label="Até" type="time" />
-                  {index !== 0 && (
+                  <Input
+                    onChange={
+                      e => setScheduleItemValue(index, 'from', e.target.value)
+                      // eslint-disable-next-line react/jsx-curly-newline
+                    }
+                    value={scheduleItem.from}
+                    name="from"
+                    label="Das"
+                    type="time"
+                  />
+                  <Input
+                    onChange={
+                      e => setScheduleItemValue(index, 'to', e.target.value)
+                      // eslint-disable-next-line react/jsx-curly-newline
+                    }
+                    value={scheduleItem.to}
+                    name="to"
+                    label="Até"
+                    type="time"
+                  />
+                  {scheduleItems.length > 1 && (
                     <>
                       <FiMinus
                         className="remove"
-                        onClick={RemoveNewScheduleItem}
+                        onClick={() => RemoveNewScheduleItem(index)}
                       />
                       <div
                         className="remove-mobile"
                         aria-hidden="true"
-                        onClick={RemoveNewScheduleItem}
+                        onClick={() => RemoveNewScheduleItem(index)}
                       >
                         Excluir horario
                         <FiMinus />

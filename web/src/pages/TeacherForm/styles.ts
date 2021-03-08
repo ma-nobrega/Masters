@@ -128,7 +128,7 @@ export const ScheduleItem = styled.div`
     display: grid;
     grid-template-columns: 2fr 1fr 1fr;
     column-gap: 1.6rem;
-    div {
+    > div {
       margin-top: 0.8rem !important;
     }
     svg {
@@ -137,6 +137,9 @@ export const ScheduleItem = styled.div`
         position: absolute;
         top: 5.6rem;
         right: -3.2rem;
+      }
+      &:hover {
+        color: var(--color-primary);
       }
     }
   }

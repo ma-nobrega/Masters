@@ -16,7 +16,7 @@ interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   name: string;
   firstOption: string;
   options: Array<{
-    value: string;
+    value: string | number;
     label: string;
   }>;
   icon?: React.ComponentType<IconBaseProps>;
@@ -30,7 +30,7 @@ const Select: React.FC<Props> = ({
   ...rest
 }) => {
   const selectRef = useRef<HTMLSelectElement>(null);
-  const { fieldName, error, registerField } = useField(name);
+  const { fieldName, error, defaultValue, registerField } = useField(name);
   const [isFocused, setIsFocused] = useState(false);
   const [isFilled, setIsFilled] = useState(false);
 
@@ -57,7 +57,7 @@ const Select: React.FC<Props> = ({
       <Content isErrored={!!error} isFilled={isFilled} isFocused={isFocused}>
         {Icon && <Icon size={20} />}
         <select
-          defaultValue=""
+          defaultValue={defaultValue}
           ref={selectRef}
           onFocus={handleSelectFocus}
           onBlur={handleSelectBlur}
