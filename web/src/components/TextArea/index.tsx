@@ -1,4 +1,3 @@
-import { useField } from '@unform/core';
 import React, {
   TextareaHTMLAttributes,
   useCallback,
@@ -6,6 +5,8 @@ import React, {
   useRef,
   useState,
 } from 'react';
+import { useField } from '@unform/core';
+import { FiAlertCircle } from 'react-icons/fi';
 
 import { Container, Textarea } from './styles';
 
@@ -41,6 +42,7 @@ const TextArea: React.FC<Props> = ({ label, name, ...rest }) => {
       <label htmlFor={name}>{label}</label>
       <Textarea
         defaultValue={defaultValue}
+        ref={textAreaRef}
         isErrored={!!error}
         isFilled={isFilled}
         isFocused={isFocused}
@@ -49,6 +51,12 @@ const TextArea: React.FC<Props> = ({ label, name, ...rest }) => {
         id={name}
         {...rest}
       />
+      {error && (
+        <div>
+          {error}
+          <FiAlertCircle />
+        </div>
+      )}
     </Container>
   );
 };

@@ -32,8 +32,8 @@ const TeacherList: React.FC = () => {
         avatar: Yup.string().required('Avatar obrigatório'),
         whatsapp: Yup.string().required('Whatsapp obrigatório'),
         bio: Yup.string()
-          .required('Biografia obrigatório')
-          .min(200, 'A biografia menor que 200 caracteres'),
+          .required('Biografia obrigatoria')
+          .min(200, 'Biografia deve possuir pelo menos 200 caracteres'),
         subject: Yup.string().required('Materia obrigatório'),
         cost: Yup.string().required('Valor obrigatório'),
         week: Yup.string().required('Dia da semana obrigatório'),

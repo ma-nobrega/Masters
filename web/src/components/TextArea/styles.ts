@@ -7,9 +7,19 @@ interface TextAreaProps {
 }
 
 export const Container = styled.div`
-  position: relative;
   label {
     font-size: 1.4rem;
+  }
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    height: 1.5rem;
+    color: var(--color-error);
+    font-size: 1rem;
+    svg {
+      margin-left: 0.8rem;
+    }
   }
 `;
 
