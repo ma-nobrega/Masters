@@ -6,6 +6,7 @@ import TeacherList from '../pages/TeacherList';
 import TeacherForm from '../pages/TeacherForm';
 import SignIn from '../pages/SignIn';
 import SignUp from '../pages/SignUp';
+import Subjects from '../pages/Subjects';
 
 const Routes: React.FC = () => (
   <Switch>
@@ -13,7 +14,8 @@ const Routes: React.FC = () => (
     <Route path="/signup" exact component={SignUp} />
     <Route path="/dashboard" exact component={Dashboard} />
     <Route path="/study" component={TeacherList} />
-    <Route path="/give-classes" component={TeacherForm} />
+    <Route path="/give-classes" component={Subjects} />
+    <Route path="/form-give-classes" component={TeacherForm} />
   </Switch>
 );
 
