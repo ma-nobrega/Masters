@@ -30,7 +30,7 @@ export const Content = styled.div`
       margin-bottom: 1.6rem;
     }
     > div {
-      margin-bottom: 0.8rem;
+      margin-bottom: 1.2rem;
       text-align: start;
     }
     button {
@@ -50,7 +50,7 @@ export const Content = styled.div`
   > a {
     color: var(--color-primary);
     display: block;
-    margin-top: 2.4rem;
+    margin-top: 0.8rem;
     transition: color 0.2s;
     display: flex;
     align-items: center;

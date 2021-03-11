@@ -1,5 +1,5 @@
 import React, { useCallback, useRef } from 'react';
-import { FiHome, FiLock, FiMail, FiUser } from 'react-icons/fi';
+import { FiHome, FiLock, FiMail, FiSmartphone, FiUser } from 'react-icons/fi';
 
 import { Link } from 'react-router-dom';
 import { Form } from '@unform/web';
@@ -19,6 +19,7 @@ const SignIn: React.FC = () => {
 
       const schema = Yup.object().shape({
         name: Yup.string().required('Nome obrigatório'),
+        smartphone: Yup.string().required('Celular obrigatório'),
         email: Yup.string()
           .email('Digite um e-mail válido')
           .required('E-mail obrigatório'),
@@ -46,6 +47,12 @@ const SignIn: React.FC = () => {
             placeholder="Digite seu nome"
             label="Nome"
             name="name"
+          />
+          <Input
+            icon={FiSmartphone}
+            placeholder="Digite seu celular"
+            label="Celular"
+            name="smartphone"
           />
           <Input
             icon={FiMail}
