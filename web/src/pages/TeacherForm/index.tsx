@@ -1,13 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import {
-  FiBook,
-  FiCalendar,
-  FiCamera,
-  FiDollarSign,
-  FiMinus,
-  FiUser,
-} from 'react-icons/fi';
-import { FaWhatsapp } from 'react-icons/fa';
+import { FiBook, FiCalendar, FiDollarSign, FiMinus } from 'react-icons/fi';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 import { Form } from '@unform/web';
@@ -17,7 +9,6 @@ import Input from '../../components/Input';
 import getValidationErrors from '../../utils/getValidationErros';
 
 import warningIcon from '../../assets/icons/warning.svg';
-import TextArea from '../../components/TextArea';
 import Select from '../../components/Select';
 import Header from '../../components/Header';
 
@@ -28,12 +19,6 @@ const TeacherList: React.FC = () => {
       formRef.current?.setErrors({});
 
       const schema = Yup.object().shape({
-        name: Yup.string().required('Nome obrigatório'),
-        avatar: Yup.string().required('Avatar obrigatório'),
-        whatsapp: Yup.string().required('Whatsapp obrigatório'),
-        bio: Yup.string()
-          .required('Biografia obrigatoria')
-          .min(200, 'Biografia deve possuir pelo menos 200 caracteres'),
         subject: Yup.string().required('Materia obrigatório'),
         cost: Yup.string().required('Valor obrigatório'),
         week: Yup.string().required('Dia da semana obrigatório'),
@@ -89,13 +74,6 @@ const TeacherList: React.FC = () => {
       />
       <Main>
         <Form ref={formRef} onSubmit={handleSubmit}>
-          <fieldset>
-            <legend>Seus dados</legend>
-            <Input icon={FiUser} label="Nome completo" name="name" />
-            <Input icon={FiCamera} label="Avatar" name="avatar" />
-            <Input icon={FaWhatsapp} label="Whatsapp" name="whatsapp" />
-            <TextArea label="Biografia" name="bio" />
-          </fieldset>
           <fieldset>
             <legend>Sobre a aula</legend>
             <Select
