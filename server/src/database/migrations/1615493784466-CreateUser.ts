@@ -11,6 +11,7 @@ export default class CreateUser1615493784466 implements MigrationInterface {
             type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'name',
@@ -20,12 +21,11 @@ export default class CreateUser1615493784466 implements MigrationInterface {
           {
             name: 'email',
             type: 'varchar',
-            isNullable: false,
+            isUnique: true,
           },
           {
             name: 'password',
             type: 'varchar',
-            isNullable: false,
           },
           {
             name: 'avatar',
@@ -41,11 +41,6 @@ export default class CreateUser1615493784466 implements MigrationInterface {
             name: 'bio',
             type: 'varchar',
             isNullable: true,
-          },
-          {
-            name: 'date',
-            type: 'timestamp with time zone',
-            isNullable: false,
           },
           {
             name: 'created_at',

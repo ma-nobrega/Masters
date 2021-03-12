@@ -4,29 +4,29 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-import Users from './Users';
+import User from './User';
 
 @Entity('classes')
 class Class {
-  @PrimaryColumn('uuid')
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('string')
+  @Column()
   subject: string;
 
-  @Column('string')
-  cost: string;
+  @Column('decimal')
+  cost: number;
 
   @Column()
   user_id: string;
 
-  @ManyToOne(() => Users)
+  @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
-  user: Users;
+  user: User;
 
   @CreateDateColumn()
   created_at: Date;

@@ -14,9 +14,10 @@ export default class CreateClassesSchedule1615498801852
         columns: [
           {
             name: 'id',
-            type: 'varchar',
+            type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
+            default: 'uuid_generate_v4()',
           },
           {
             name: 'classes_id',
@@ -65,7 +66,7 @@ export default class CreateClassesSchedule1615498801852
 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropForeignKey(
-      'classes-schedules',
+      'classes_schedules',
       'ClassesSchedulesClasses',
     );
     await queryRunner.dropTable('classes_schedules');

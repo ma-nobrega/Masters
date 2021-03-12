@@ -2,35 +2,32 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 @Entity('users')
 class User {
-  @PrimaryColumn('uuid')
+  @PrimaryGeneratedColumn()
   id: string;
 
-  @Column('string')
+  @Column()
   name: string;
 
-  @Column('string')
+  @Column()
   avatar: string;
 
-  @Column('string')
-  phoneNumber: string;
+  @Column()
+  phone_number: string;
 
-  @Column('string')
+  @Column()
   bio: string;
 
-  @Column('string')
+  @Column()
   email: string;
 
-  @Column('string')
+  @Column()
   password: string;
-
-  @Column('timestamp with time zone')
-  date: Date;
 
   @CreateDateColumn()
   created_at: Date;

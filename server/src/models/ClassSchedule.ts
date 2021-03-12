@@ -4,29 +4,32 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-import Classes from './Classes';
+import Class from './Class';
 
 @Entity('classes_schedules')
 class ClassesSchedules {
-  @PrimaryColumn('uuid')
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('string')
-  subject: string;
+  @Column('integer')
+  week_day: number;
 
-  @Column('string')
-  cost: string;
+  @Column('integer')
+  from: number;
+
+  @Column('integer')
+  to: number;
 
   @Column()
   class_id: string;
 
-  @ManyToOne(() => Classes)
+  @ManyToOne(() => Class)
   @JoinColumn({ name: 'class_id' })
-  class: Classes;
+  class: Class;
 
   @CreateDateColumn()
   created_at: Date;
