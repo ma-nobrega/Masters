@@ -1,5 +1,6 @@
 import { getRepository } from 'typeorm';
 import Class from '../models/Class';
+import AppError from '../errors/AppError';
 
 interface Request {
   subject: string;
@@ -15,7 +16,7 @@ class CreateClassService {
       where: { subject },
     });
     if (checkClassExists) {
-      throw new Error('Subject already used.');
+      throw new AppError('Subject already used.');
     }
 
     const lesson = ClasssRepository.create({

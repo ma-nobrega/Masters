@@ -10,22 +10,18 @@ const classRouter = Router();
 classRouter.use(ensureAuthenticated);
 
 classRouter.post('/', async (request, response) => {
-  try {
-    const { week_day, from, to, class_id } = request.body;
+  const { week_day, from, to, class_id } = request.body;
 
-    const createClassSchedule = new CreateClassScheduleService();
+  const createClassSchedule = new CreateClassScheduleService();
 
-    const lesson = await createClassSchedule.execute({
-      week_day,
-      from,
-      to,
-      class_id,
-    });
+  const lesson = await createClassSchedule.execute({
+    week_day,
+    from,
+    to,
+    class_id,
+  });
 
-    return response.json(lesson);
-  } catch (err) {
-    return response.status(400).json({ error: err.message });
-  }
+  return response.json(lesson);
 });
 
 classRouter.get('/', (request, response) => {

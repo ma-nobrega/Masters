@@ -10,21 +10,17 @@ const classRouter = Router();
 classRouter.use(ensureAuthenticated);
 
 classRouter.post('/', async (request, response) => {
-  try {
-    const { subject, cost, user_id } = request.body;
+  const { subject, cost, user_id } = request.body;
 
-    const createClass = new CreateClassService();
+  const createClass = new CreateClassService();
 
-    const lesson = await createClass.execute({
-      subject,
-      cost,
-      user_id,
-    });
+  const lesson = await createClass.execute({
+    subject,
+    cost,
+    user_id,
+  });
 
-    return response.json(lesson);
-  } catch (err) {
-    return response.status(400).json({ error: err.message });
-  }
+  return response.json(lesson);
 });
 
 classRouter.get('/', (request, response) => {

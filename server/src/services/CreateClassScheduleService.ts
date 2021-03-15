@@ -1,5 +1,6 @@
 import { getRepository } from 'typeorm';
 import ClassSchedule from '../models/ClassSchedule';
+import AppError from '../errors/AppError';
 
 interface Request {
   week_day: number;
@@ -21,7 +22,7 @@ class CreateClassScheduleService {
       where: { week_day },
     });
     if (checkClassScheduleExists) {
-      throw new Error('Subject already used.');
+      throw new AppError('Week day already used.');
     }
 
     const lesson = ClassSchedulesRepository.create({
