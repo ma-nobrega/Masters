@@ -1,10 +1,12 @@
 import React from 'react';
 import { FaPowerOff } from 'react-icons/fa';
 import logoWhite from '../../assets/logo-white.svg';
+import { useAuth } from '../../hooks/auth';
 
 import { Container, Content, Profile } from './styles';
 
 const Header: React.FC = () => {
+  const { signOut } = useAuth();
   return (
     <Container>
       <Content>
@@ -17,7 +19,7 @@ const Header: React.FC = () => {
             />
             <strong>Matheus Nobrega</strong>
           </Profile>
-          <FaPowerOff />
+          <FaPowerOff onClick={signOut} />
         </div>
       </Content>
     </Container>
