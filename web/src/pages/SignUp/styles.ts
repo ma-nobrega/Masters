@@ -1,5 +1,5 @@
 import { darken } from 'polished';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import BackgroundImage from '../../assets/background.jpg';
 
@@ -17,6 +17,30 @@ export const Content = styled.div`
   align-items: center;
   width: 100%;
   max-width: 700px;
+
+  @media (min-width: 1000px) {
+    max-height: 80rem;
+  }
+`;
+
+const appearFromRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+`;
+
+export const AnimationContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  animation: ${appearFromRight} 1s;
 
   > img {
     height: 10rem;
@@ -60,9 +84,6 @@ export const Content = styled.div`
     > svg {
       margin-right: 1.6rem;
     }
-  }
-  @media (min-width: 1000px) {
-    max-height: 80rem;
   }
 `;
 
