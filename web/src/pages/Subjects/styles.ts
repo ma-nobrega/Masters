@@ -35,7 +35,7 @@ export const MainContent = styled.div`
   flex-wrap: wrap;
   @media (min-width: 1100px) {
     width: 1100px;
-    justify-content: space-around;
+    justify-content: center;
     flex-direction: row;
     align-items: flex-start;
   }

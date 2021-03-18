@@ -10,7 +10,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: space-around;
   padding: 0 1.6rem;
-  margin: 1.6rem 0;
+  margin: 1.6rem 0.8rem;
   strong {
     font-size: 2.4rem;
     & + div {

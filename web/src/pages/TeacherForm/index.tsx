@@ -69,6 +69,7 @@ const TeacherList: React.FC = () => {
     <Container id="page-teacher-form" className="container">
       <Header />
       <PageHeader
+        to="/give-classes"
         title="Que incrivel que você quer dar aulas."
         description="O primeiro passo é preencher esse formulario de inscrição"
       />

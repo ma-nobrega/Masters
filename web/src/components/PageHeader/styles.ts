@@ -1,24 +1,22 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-export const Container = styled.header`
+export const Container = styled.div`
   display: flex;
   flex-direction: column;
   background-color: var(--color-primary);
+  width: 100%;
   @media (min-width: 700px) {
-    height: 340px;
+    height: 24rem;
   }
 `;
 
-export const TopBar = styled.div`
-  width: 90%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: var(--color-text-in-primary);
-  padding: 1.6rem 0;
+export const Back = styled(Link)`
+  position: absolute;
+  top: 30%;
+  left: -8rem;
   > img {
-    height: 1.6rem;
+    height: 3.2rem;
   }
   > a {
     height: 3.2rem;
@@ -33,6 +31,7 @@ export const TopBar = styled.div`
 `;
 
 export const HeaderContent = styled.div`
+  position: relative;
   width: 90%;
   margin: 0 auto;
   position: relative;

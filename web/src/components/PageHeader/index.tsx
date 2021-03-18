@@ -1,26 +1,21 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-
-import logo from '../../assets/logo-white.svg';
 import backIcon from '../../assets/icons/back.svg';
 
-import { Container, TopBar, HeaderContent } from './styles';
+import { Container, Back, HeaderContent } from './styles';
 
 interface Props {
   title: string;
   description?: string;
+  to: string;
 }
 
-const PageHeader: React.FC<Props> = ({ title, description, children }) => {
+const PageHeader: React.FC<Props> = ({ to, title, description, children }) => {
   return (
     <Container>
-      <TopBar className="top-bar-container">
-        <Link to="/dashboard">
-          <img src={backIcon} alt="Voltar" />
-        </Link>
-        <img src={logo} alt="Proffy" />
-      </TopBar>
       <HeaderContent className="header-content">
+        <Back to={to}>
+          <img src={backIcon} alt="Voltar" />
+        </Back>
         <strong>{title}</strong>
         {description && <p>{description}</p>}
         {children}
