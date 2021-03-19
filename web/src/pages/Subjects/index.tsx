@@ -11,7 +11,7 @@ const Dashboard: React.FC = () => {
     <Container>
       <Header />
       <PageHeader
-        to="/dashboard"
+        to="/schedules"
         title="Cadastre suas matérias"
         description="Matérias criadas aqui seram vistas pelos alunos"
       />

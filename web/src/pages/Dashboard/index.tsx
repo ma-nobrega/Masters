@@ -42,7 +42,7 @@ const Dashboard: React.FC = () => {
               <BsBook />
               Estudar
             </Link>
-            <Link to="/give-classes" className="give-classes">
+            <Link to="/schedules" className="give-classes">
               <BsLaptop />
               Dar aulas
             </Link>
