@@ -190,7 +190,7 @@ export const Calendar = styled.aside`
   .DayPicker:not(.DayPicker--interactionDisabled)
     .DayPicker-Day:not(.DayPicker-Day--disabled):not(.DayPicker-Day--selected):not(.DayPicker-Day--outside):hover {
     background: var(--color-primary);
-    color: var(--color-text-in-primary);
+    color: var(--color-title-in-primary);
   }
   .DayPicker-Day--today {
     font-weight: normal;
@@ -202,6 +202,6 @@ export const Calendar = styled.aside`
   .DayPicker-Day--selected {
     background: var(--color-primary) !important;
     border-radius: 0.8rem;
-    color: var(--color-text-in-primary) !important;
+    color: var(--color-title-in-primary) !important;
   }
 `;
