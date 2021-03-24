@@ -27,8 +27,8 @@ class ClassesRepository implements IClassesRepository {
     return user;
   }
 
-  public async save(user: Class): Promise<Class> {
-    return this.ormRepository.save(user);
+  public async save(lesson: Class): Promise<Class> {
+    return this.ormRepository.save(lesson);
   }
 }
 

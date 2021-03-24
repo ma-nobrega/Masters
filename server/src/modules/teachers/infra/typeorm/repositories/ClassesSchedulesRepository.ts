@@ -28,8 +28,8 @@ class ClassesSchedulesRepository implements IClassesSchedulesRepository {
     return user;
   }
 
-  public async save(user: ClassSchedule): Promise<ClassSchedule> {
-    return this.ormRepository.save(user);
+  public async save(classSchedule: ClassSchedule): Promise<ClassSchedule> {
+    return this.ormRepository.save(classSchedule);
   }
 }
 

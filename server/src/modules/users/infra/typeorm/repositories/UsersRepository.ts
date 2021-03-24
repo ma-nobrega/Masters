@@ -27,16 +27,12 @@ class UsersRepository implements IUsersRepository {
     email,
     password,
     phone_number,
-    avatar,
-    bio,
   }: ICreateUserDTO): Promise<User> {
     const user = this.ormRepository.create({
       name,
       email,
       password,
       phone_number,
-      avatar,
-      bio,
     });
     await this.ormRepository.save(user);
     return user;
