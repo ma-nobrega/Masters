@@ -2,11 +2,15 @@ import AppError from '@shared/errors/AppError';
 import FakeClassesRepository from '../repositories/fakes/FakeClassesRepository';
 import CreateClassService from './CreateClassService';
 
-describe('CreateClassService', () => {
-  it('should be able to create a new class', async () => {
-    const fakeClassesRepository = new FakeClassesRepository();
-    const createClass = new CreateClassService(fakeClassesRepository);
+let fakeClassesRepository: FakeClassesRepository;
+let createClass: CreateClassService;
 
+describe('CreateClassService', () => {
+  beforeEach(() => {
+    fakeClassesRepository = new FakeClassesRepository();
+    createClass = new CreateClassService(fakeClassesRepository);
+  });
+  it('should be able to create a new class', async () => {
     const lesson = await createClass.execute({
       cost: 20,
       subject: 'Biologia',
@@ -16,9 +20,6 @@ describe('CreateClassService', () => {
     expect(lesson.user_id).toBe('1232555612');
   });
   it('should not be able to create two class with the same name', async () => {
-    const fakeClassesRepository = new FakeClassesRepository();
-    const createClass = new CreateClassService(fakeClassesRepository);
-
     const classSubject = 'Biologia';
 
     await createClass.execute({
@@ -27,7 +28,7 @@ describe('CreateClassService', () => {
       user_id: '1232555612',
     });
 
-    expect(
+    await expect(
       createClass.execute({
         cost: 20,
         subject: classSubject,

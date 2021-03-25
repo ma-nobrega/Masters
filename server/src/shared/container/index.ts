@@ -9,6 +9,8 @@ import IClassesRepository from '@modules/teachers/repositories/IClassesRepositor
 import ClassesRepository from '@modules/teachers/infra/typeorm/repositories/ClassesRepository';
 import IClassesSchedulesRepository from '@modules/teachers/repositories/IClassesSchedulesRepository';
 import ClassesSchedulesRepository from '@modules/teachers/infra/typeorm/repositories/ClassesSchedulesRepository';
+import IUserTokensRepository from '@modules/users/repositories/IUserTokensRepository';
+import UserTokensRepository from '@modules/users/infra/typeorm/repositories/UserTokensRepository';
 
 container.registerSingleton<IUsersRepository>(
   'UsersRepository',
@@ -23,4 +25,9 @@ container.registerSingleton<IClassesRepository>(
 container.registerSingleton<IClassesSchedulesRepository>(
   'ClassesSchedulesRepository',
   ClassesSchedulesRepository,
+);
+
+container.registerSingleton<IUserTokensRepository>(
+  'UserTokensRepository',
+  UserTokensRepository,
 );
