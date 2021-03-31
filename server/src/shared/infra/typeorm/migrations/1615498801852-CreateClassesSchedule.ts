@@ -20,7 +20,7 @@ export default class CreateClassesSchedule1615498801852
             default: 'uuid_generate_v4()',
           },
           {
-            name: 'classes_id',
+            name: 'class_id',
             type: 'uuid',
           },
           {
@@ -55,7 +55,7 @@ export default class CreateClassesSchedule1615498801852
       'classes_schedules',
       new TableForeignKey({
         name: 'ClassesSchedulesClasses',
-        columnNames: ['classes_id'],
+        columnNames: ['class_id'],
         referencedColumnNames: ['id'],
         referencedTableName: 'classes',
         onDelete: 'CASCADE',

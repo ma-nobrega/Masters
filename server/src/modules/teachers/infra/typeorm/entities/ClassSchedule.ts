@@ -11,7 +11,7 @@ import {
 import Class from '@modules/teachers/infra/typeorm/entities/Class';
 
 @Entity('classes_schedules')
-class ClassesSchedules {
+class ClassSchedule {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -37,4 +37,4 @@ class ClassesSchedules {
   @UpdateDateColumn()
   updated_at: Date;
 }
-export default ClassesSchedules;
+export default ClassSchedule;

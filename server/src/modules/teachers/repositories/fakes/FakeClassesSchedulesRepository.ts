@@ -2,6 +2,7 @@ import IClassesSchedulesRepository from '@modules/teachers/repositories/IClasses
 import ICreateClassScheduleDTO from '@modules/teachers/dtos/ICreateClassScheduleDTO';
 import ClassSchedule from '@modules/teachers/infra/typeorm/entities/ClassSchedule';
 import { uuid } from 'uuidv4';
+import IListClassSchedule from '@modules/teachers/dtos/IFindAllClassSchedule';
 
 class ClassesSchedulesRepository implements IClassesSchedulesRepository {
   private classesSchedules: ClassSchedule[] = [];
@@ -11,6 +12,16 @@ class ClassesSchedulesRepository implements IClassesSchedulesRepository {
       day => day.week_day === week_day,
     );
     return findClassSchedules;
+  }
+
+  public async findAllClassSchedule({
+    from,
+    subject,
+    week_day,
+  }: IListClassSchedule): Promise<ClassSchedule[]> {
+    const { classesSchedules } = this;
+
+    return classesSchedules;
   }
 
   public async create({

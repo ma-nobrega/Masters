@@ -8,5 +8,6 @@ const classesSchedulesController = new ClassesSchedulesController();
 classRouter.use(ensureAuthenticated);
 
 classRouter.post('/', classesSchedulesController.create);
+classRouter.get('/', classesSchedulesController.index);
 
 export default classRouter;

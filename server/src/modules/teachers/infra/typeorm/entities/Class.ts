@@ -4,11 +4,13 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import User from '@modules/users/infra/typeorm/entities/User';
+import ClassSchedule from './ClassSchedule';
 
 @Entity('classes')
 class Class {
@@ -27,6 +29,9 @@ class Class {
   @ManyToOne(() => User)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @OneToMany(() => ClassSchedule, classSchedule => classSchedule.class)
+  classSchedule: ClassSchedule[];
 
   @CreateDateColumn()
   created_at: Date;

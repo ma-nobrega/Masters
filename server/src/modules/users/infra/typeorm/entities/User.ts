@@ -1,7 +1,9 @@
+import Class from '@modules/teachers/infra/typeorm/entities/Class';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -28,6 +30,9 @@ class User {
 
   @Column()
   password: string;
+
+  @OneToMany(() => Class, classEntity => classEntity.user)
+  class: Class[];
 
   @CreateDateColumn()
   created_at: Date;
