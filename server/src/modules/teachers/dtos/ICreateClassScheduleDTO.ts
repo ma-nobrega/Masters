@@ -1,6 +1,6 @@
 export default interface ICreateClassScheduleDTO {
   week_day: number;
-  from: number;
-  to: number;
+  from: string;
+  to: string;
   class_id: string;
 }

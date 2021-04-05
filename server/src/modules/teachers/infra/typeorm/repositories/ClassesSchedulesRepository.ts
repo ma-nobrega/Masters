@@ -2,6 +2,7 @@ import IClassesSchedulesRepository from '@modules/teachers/repositories/IClasses
 import ICreateClassScheduleDTO from '@modules/teachers/dtos/ICreateClassScheduleDTO';
 import { getRepository, Repository } from 'typeorm';
 import IFindAllClassSchedule from '@modules/teachers/dtos/IFindAllClassSchedule';
+import convertHourToMinutes from '@shared/utils/convertHourToMinutes';
 import ClassSchedule from '../entities/ClassSchedule';
 
 class ClassesSchedulesRepository implements IClassesSchedulesRepository {
@@ -19,15 +20,18 @@ class ClassesSchedulesRepository implements IClassesSchedulesRepository {
   }
 
   public async findAllClassSchedule({
-    from,
+    time,
     week_day,
     subject,
   }: IFindAllClassSchedule): Promise<ClassSchedule[]> {
     const classesSchedules = await this.ormRepository
       .createQueryBuilder('classSchedule')
-      .leftJoinAndSelect('classSchedule.class', 'cs')
+      .innerJoinAndSelect('classSchedule.class', 'cs')
+      .innerJoinAndSelect('cs.user', 'user')
       .where('cs.id = classSchedule.class_id')
-      .andWhere('classSchedule.from = :from', { from })
+      .andWhere('user.id = cs.user_id')
+      .andWhere('classSchedule.from <= :time', { time })
+      .andWhere('classSchedule.to > :time', { time })
       .andWhere('classSchedule.week_day = :week_day', { week_day })
       .andWhere('cs.subject = :subject', { subject })
       .getMany();
@@ -41,7 +45,12 @@ class ClassesSchedulesRepository implements IClassesSchedulesRepository {
     to,
     class_id,
   }: ICreateClassScheduleDTO): Promise<ClassSchedule> {
-    const user = this.ormRepository.create({ week_day, from, to, class_id });
+    const user = this.ormRepository.create({
+      week_day,
+      from: convertHourToMinutes(from),
+      to: convertHourToMinutes(to),
+      class_id,
+    });
     await this.ormRepository.save(user);
     return user;
   }

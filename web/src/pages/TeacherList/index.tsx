@@ -1,4 +1,4 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { FiBook, FiCalendar } from 'react-icons/fi';
 import * as Yup from 'yup';
 import { Form } from '@unform/web';
@@ -10,27 +10,74 @@ import TeacherItem from '../../components/TeacherItem';
 import Select from '../../components/Select';
 import Header from '../../components/Header';
 import getValidationErrors from '../../utils/getValidationErros';
+import api from '../../services/api';
+import { useToast } from '../../hooks/toast';
+
+interface TeacherData {
+  subject: string;
+  week_day: string;
+  time: string;
+}
+
+export interface User {
+  id: string;
+  name: string;
+  avatar: string;
+  whatsapp: string;
+  bio: string;
+}
+
+export interface Class {
+  id: string;
+  user: User;
+  subject: string;
+  cost: number;
+}
+
+export interface ClassSchedule {
+  id: string;
+  week_day: number;
+  class: Class;
+}
 
 const TeacherList: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
-  const handleSubmit = useCallback(async (data: object) => {
-    try {
-      formRef.current?.setErrors({});
+  const { addToast } = useToast();
+  const [classSchedule, setClassSchedule] = useState<ClassSchedule[]>([]);
 
-      const schema = Yup.object().shape({
-        subject: Yup.string().required('Materia obrigatório'),
-        week: Yup.string().required('Dia da semana obrigatório'),
-        time: Yup.string().required('Horário obrigatório'),
-      });
+  const handleSubmit = useCallback(
+    async (data: TeacherData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      await schema.validate(data, {
-        abortEarly: false,
-      });
-    } catch (err) {
-      const errors = getValidationErrors(err);
-      formRef.current?.setErrors(errors);
-    }
-  }, []);
+        const schema = Yup.object().shape({
+          subject: Yup.string().required('Materia obrigatório'),
+          week_day: Yup.string().required('Dia da semana obrigatório'),
+          time: Yup.string().required('Horário obrigatório'),
+        });
+
+        await schema.validate(data, {
+          abortEarly: false,
+        });
+
+        const response = await api.get('/classes-schedules', {
+          params: data,
+        });
+        console.log(response.data);
+
+        setClassSchedule(response.data);
+      } catch (err) {
+        const errors = getValidationErrors(err);
+        formRef.current?.setErrors(errors);
+        addToast({
+          type: 'error',
+          title: 'Erro na busca',
+          description: 'Ocorreu um erro ao fazer o filtro, cheque os campos.',
+        });
+      }
+    },
+    [addToast],
+  );
 
   return (
     <Container id="page-teacher-list" className="container">
@@ -60,7 +107,7 @@ const TeacherList: React.FC = () => {
             firstOption="aaa"
             icon={FiCalendar}
             label="Dia da semana"
-            name="week"
+            name="week_day"
             options={[
               { value: '0', label: 'Domingo' },
               { value: '1', label: 'Segunda-feira' },
@@ -76,27 +123,18 @@ const TeacherList: React.FC = () => {
         </Form>
       </PageHeader>
       <Main>
-        <TeacherItem
-          name="Matheus Nobrega"
-          avatar="https://avatars.githubusercontent.com/u/39496767?s=460&u=d137acee042772f04efce67179aa4374ad5e3be0&v=4"
-          subject="Educação Física"
-          bio="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi quisquam fugit eum odit eius, aperiam illo neque iure velit eos molestiae sunt sed quas et eaque, beatae, voluptates ad porro."
-          cost="80"
-        />
-        <TeacherItem
-          name="Matheus Nobrega"
-          avatar="https://avatars.githubusercontent.com/u/39496767?s=460&u=d137acee042772f04efce67179aa4374ad5e3be0&v=4"
-          subject="Educação Física"
-          bio="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi quisquam fugit eum odit eius, aperiam illo neque iure velit eos molestiae sunt sed quas et eaque, beatae, voluptates ad porro."
-          cost="80"
-        />
-        <TeacherItem
-          name="Matheus Nobrega"
-          avatar="https://avatars.githubusercontent.com/u/39496767?s=460&u=d137acee042772f04efce67179aa4374ad5e3be0&v=4"
-          subject="Educação Física"
-          bio="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Animi quisquam fugit eum odit eius, aperiam illo neque iure velit eos molestiae sunt sed quas et eaque, beatae, voluptates ad porro."
-          cost="80"
-        />
+        {classSchedule.map((cSchedule: ClassSchedule) => {
+          return (
+            <TeacherItem
+              key={cSchedule.id}
+              name={cSchedule.class.user.name}
+              avatar="https://avatars.githubusercontent.com/u/39496767?s=460&u=d137acee042772f04efce67179aa4374ad5e3be0&v=4"
+              subject={cSchedule.class.subject}
+              bio={cSchedule.class.user.bio}
+              cost={cSchedule.class.cost}
+            />
+          );
+        })}
       </Main>
     </Container>
   );

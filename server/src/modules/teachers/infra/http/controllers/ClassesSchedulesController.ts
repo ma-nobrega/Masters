@@ -21,9 +21,9 @@ export default class ClassesSchedulesController {
   }
 
   public async index(request: Request, response: Response): Promise<Response> {
-    const { week_day, from, subject } = request.query;
+    const { week_day, time, subject } = request.query;
 
-    if (!week_day?.length || !subject || !from)
+    if (!week_day?.length || !subject || !time)
       throw new AppError('Missing filters to search classes');
 
     const listClassScheduleService = container.resolve(
@@ -32,7 +32,7 @@ export default class ClassesSchedulesController {
 
     const classSchedule = await listClassScheduleService.execute({
       week_day: Number(week_day),
-      from: Number(from),
+      time: String(time),
       subject: String(subject),
     });
     return response.json(classSchedule);

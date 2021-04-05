@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { darken } from 'polished';
 
 export const Container = styled.div`
   display: flex;
@@ -48,6 +49,26 @@ export const HeaderContent = styled.div`
     color: var(--color-text-in-primary);
     margin-top: 2.4rem;
   }
+
+  button {
+    width: 100%;
+    height: 5.6rem;
+    background: var(--color-secondary);
+    color: var(--color-button-text);
+    border: 0;
+    border-radius: 0.8rem;
+    font: 700 1.6rem Archivo;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: background-color 0.2s;
+    margin-top: 2.8rem;
+    &:hover {
+      background: ${darken(0.1, '#1772af')};
+    }
+  }
+
   @media (min-width: 700px) {
     flex: 1;
     max-width: 740px;

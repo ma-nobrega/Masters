@@ -55,7 +55,7 @@ export const Container = styled.article`
         margin-left: 1.6rem;
       }
     }
-    button {
+    > button {
       width: 20rem;
       height: 5.6rem;
       background-color: var(--color-secondary);

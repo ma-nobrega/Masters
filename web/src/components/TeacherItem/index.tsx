@@ -5,7 +5,7 @@ import { Container } from './styles';
 interface Props {
   avatar: string;
   bio: string;
-  cost: string;
+  cost: number;
   name: string;
   subject: string;
 }
