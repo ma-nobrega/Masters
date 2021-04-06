@@ -4,7 +4,11 @@ import ClassSchedule from '../infra/typeorm/entities/ClassSchedule';
 
 export default interface IClassesSchedulesRepository {
   findAllClassSchedule(data: IFindAllClassSchedule): Promise<ClassSchedule[]>;
-  findByDay(week_day: number): Promise<ClassSchedule | undefined>;
+  findBySchedule(
+    week_day: number,
+    from: string,
+    to: string,
+  ): Promise<ClassSchedule | undefined>;
   create(data: ICreateClassScheduleDTO): Promise<ClassSchedule>;
   save(classSchedule: ClassSchedule): Promise<ClassSchedule>;
 }

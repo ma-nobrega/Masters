@@ -5,8 +5,8 @@ import IClassesSchedulesRepository from '../repositories/IClassesSchedulesReposi
 
 interface IRequest {
   week_day: number;
-  from: number;
-  to: number;
+  from: string;
+  to: string;
   class_id: string;
 }
 
@@ -23,11 +23,13 @@ class CreateClassScheduleService {
     to,
     class_id,
   }: IRequest): Promise<ClassSchedule> {
-    const checkClassScheduleExists = await this.classScheduleRepository.findByDay(
+    const checkClassScheduleExists = await this.classScheduleRepository.findBySchedule(
       week_day,
+      from,
+      to,
     );
     if (checkClassScheduleExists) {
-      throw new AppError('Week day already used.');
+      throw new AppError('Class schedule already used.');
     }
 
     const schedules = await this.classScheduleRepository.create({

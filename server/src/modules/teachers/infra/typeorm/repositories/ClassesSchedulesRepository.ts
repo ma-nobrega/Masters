@@ -12,9 +12,17 @@ class ClassesSchedulesRepository implements IClassesSchedulesRepository {
     this.ormRepository = getRepository(ClassSchedule);
   }
 
-  public async findByDay(week_day: number): Promise<ClassSchedule | undefined> {
+  public async findBySchedule(
+    week_day: number,
+    from: string,
+    to: string,
+  ): Promise<ClassSchedule | undefined> {
     const user = await this.ormRepository.findOne({
-      where: { week_day },
+      where: {
+        week_day,
+        from: convertHourToMinutes(from),
+        to: convertHourToMinutes(to),
+      },
     });
     return user;
   }
