@@ -1,6 +1,7 @@
 import IClassesRepository from '@modules/teachers/repositories/IClassesRepository';
 import ICreateClassDTO from '@modules/teachers/dtos/ICreateClassDTO';
 import { getRepository, Repository } from 'typeorm';
+import IFindAllClass from '@modules/teachers/dtos/IFindAllClass';
 import Class from '../entities/Class';
 
 class ClassesRepository implements IClassesRepository {
@@ -15,6 +16,13 @@ class ClassesRepository implements IClassesRepository {
       where: { subject },
     });
     return user;
+  }
+
+  public async findAllClasses({ user_id }: IFindAllClass): Promise<Class[]> {
+    const users = await this.ormRepository.find({
+      where: { user_id },
+    });
+    return users;
   }
 
   public async create({

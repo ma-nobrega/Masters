@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiPlus } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import PageHeader from '../../components/PageHeader';
 import Matter from '../../components/Matter';
 import { Container, Main, MainContent, NewSubject } from './styles';
+import api from '../../services/api';
+
+interface Matter {
+  id: number;
+  subject: string;
+  cost: number;
+}
 
 const Dashboard: React.FC = () => {
+  const [matters, setMatters] = useState<Matter[]>([]);
+
+  useEffect(() => {
+    api.get('/classes').then(response => {
+      setMatters(response.data);
+    });
+  }, []);
   return (
     <Container>
       <Header />
@@ -22,9 +36,15 @@ const Dashboard: React.FC = () => {
           </NewSubject>
         </Link>
         <MainContent>
-          <Matter subject="sociologia" cost={20} key={1} />
-          <Matter subject="sociologia" cost={20} key={1} />
-          <Matter subject="sociologia" cost={20} key={1} />
+          {matters.map(matter => (
+            <Matter
+              subject={matter.subject}
+              cost={matter.cost}
+              key={matter.id}
+            />
+          ))}
+          {/* <Matter matter="sociologia" cost={20} key={1} /> */}
+          {/* <Matter matter="sociologia" cost={20} key={1} /> */}
         </MainContent>
       </Main>
     </Container>
