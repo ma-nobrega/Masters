@@ -9,6 +9,7 @@ interface IRequest {
   password: string;
   phone_number: string;
   email: string;
+  avatar: string;
 }
 
 @injectable()
@@ -25,10 +26,18 @@ class CreateUserService {
     password,
     phone_number,
     email,
+    avatar,
   }: IRequest): Promise<User> {
-    const checkUserExists = await this.usersRepository.findByEmail(email);
-    if (checkUserExists) {
+    const checkEmailExists = await this.usersRepository.findByEmail(email);
+    const checkPhoneNumberExists = await this.usersRepository.findByPhoneNumber(
+      phone_number,
+    );
+    if (checkEmailExists) {
       throw new AppError('Email address already used.');
+    }
+
+    if (checkPhoneNumberExists) {
+      throw new AppError('Phone number already used.');
     }
 
     const hashedPassword = await this.hashProvider.generateHash(password);
@@ -38,6 +47,7 @@ class CreateUserService {
       email,
       password: hashedPassword,
       phone_number,
+      avatar,
     });
 
     return user;

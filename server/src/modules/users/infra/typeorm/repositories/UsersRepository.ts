@@ -22,6 +22,15 @@ class UsersRepository implements IUsersRepository {
     return user;
   }
 
+  public async findByPhoneNumber(
+    phone_number: string,
+  ): Promise<User | undefined> {
+    const user = await this.ormRepository.findOne({
+      where: { phone_number },
+    });
+    return user;
+  }
+
   public async create({
     name,
     email,

@@ -19,7 +19,7 @@ export const Content = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  > img {
+  > a {
     width: 10rem;
     display: none;
   }
@@ -39,7 +39,7 @@ export const Content = styled.div`
   @media (min-width: 1100px) {
     max-width: 1100px;
     padding: 0 3.2rem;
-    > img {
+    > a {
       display: flex;
     }
     > div {
